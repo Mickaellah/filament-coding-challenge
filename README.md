@@ -25,6 +25,8 @@ This endpoint will return an array of 200 fake companies. You can verify that th
 
 Your task is to write a React application that fetches the company data from the backend and displays it in a method of your choosing. You could display the companies in a table, or as "cards" on a grid, or a stack, you could implement pagination and only show 10 at a time, the choice is yours!
 
+Start by cloning this repo and committing your changes to your own GitHub repo.
+
 ### What we expect from you
 
 - A GitHub repo containing project that fits the brief above, but it doesn't have to be perfect or look amazing! The important thing is that you can demonstrate certain key skills.
