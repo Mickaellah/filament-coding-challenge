@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import {
-  getCompaniesAsync,
-  selectCompanies,
-} from '../redux/companies/companiesSlice';
+import React from 'react';
+import { Card, CardContent, Typography } from '@mui/material';
 
-export function CompaniItem() {
-    return <div>Hello</div>
+type CompanyItemProps = {
+    name: string
+}
+
+export const CompanyItem: React.FC<CompanyItemProps> = ({name}) => {
+    return <Card variant="outlined">
+        <CardContent>
+            <Typography>{name}</Typography>
+        </CardContent>
+    </Card>
 }
