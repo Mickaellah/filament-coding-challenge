@@ -8,7 +8,7 @@ type CompanyItemProps = {
 export const CompanyItem: React.FC<CompanyItemProps> = ({name}) => {
     return <Card variant="outlined">
         <CardContent>
-            <Typography>{name}</Typography>
+            <Typography sx={{textAlign: 'center'}}>{name}</Typography>
         </CardContent>
     </Card>
 }

@@ -1,12 +1,12 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { fetchCompanies } from '../../api/companiesAPI';
-export interface CounterState {
-  value: any;
+import { Company, fetchCompanies } from '../../api/companiesAPI';
+export interface CompanyState {
+  value: Company[];
   status: 'idle' | 'loading' | 'failed';
   error: string | null;
 }
-const initialState: CounterState = {
+const initialState: CompanyState = {
   value: [],
   status: 'idle',
   error: null,
@@ -17,7 +17,6 @@ export const getCompaniesAsync = createAsyncThunk(
   async (_:void, thunkApi) => {
     const response = await fetchCompanies();
     const companies = await response.json();
-    console.log({companies});
     
     if (response.status !== 200 || !response.ok) {
       return thunkApi.rejectWithValue({
@@ -40,15 +39,20 @@ export const companiesSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(getCompaniesAsync.fulfilled, (state, action) => {
+        console.log({action});
+        
         state.status = 'idle';
         state.value = action.payload;
       })
-      .addCase(getCompaniesAsync.rejected, (state, { payload }) => {
-        state.status = 'idle';
+      .addCase(getCompaniesAsync.rejected, (state) => {
+        state.status = 'failed';
+        state.error = 'Network error'
       })
       ;
   },
 });
 
 export const selectCompanies = (state: RootState) => state.companies.value;
+export const selectCompaniesFetchSatus = (state: RootState) => state.companies.status;
+export const selectCompaniesFetchError = (state: RootState) => state.companies.error;
 export default companiesSlice.reducer;
